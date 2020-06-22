@@ -1,4 +1,4 @@
-package fr.areku.tlmd;
+package uk.co.piratescode.tlmd;
 
 import java.util.EnumMap;
 import java.util.Map;

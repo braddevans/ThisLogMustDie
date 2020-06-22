@@ -1,13 +1,13 @@
-package fr.areku.tlmd.filters;
+package uk.co.piratescode.tlmd.filters;
 
 import java.util.logging.Filter;
 import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
-import fr.areku.tlmd.TlmdFilter;
+import uk.co.piratescode.tlmd.TlmdFilter;
 
 
-public class LevelFilter extends TlmdFilter  implements Filter  {
+public class LevelFilter extends TlmdFilter implements Filter  {
 	@Override
 	public boolean isLoggable(LogRecord record) {
 		Level m = record.getLevel();

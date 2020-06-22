@@ -1,13 +1,13 @@
-package fr.areku.tlmd.filters;
+package uk.co.piratescode.tlmd.filters;
 
 import java.util.Map;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
 
-import fr.areku.tlmd.TlmdFilter;
+import uk.co.piratescode.tlmd.TlmdFilter;
 
 
-public class ExactFilter extends TlmdFilter implements Filter  {
+public class LoggerFilter extends TlmdFilter implements Filter  {
 	private boolean caseSensitive;
 
 	@Override
@@ -18,13 +18,14 @@ public class ExactFilter extends TlmdFilter implements Filter  {
 		}
 		return true;
 	}
-
+	
 	@Override
 	public boolean isLoggable(LogRecord record) {
-		String m = record.getMessage().trim();
+		String m = record.getLoggerName();
 		if(this.caseSensitive){
 			if(m.equals(this.getExpression())){
 				this.write(record);
+				this.getParent().incrementFilteredLogCount();
 				return false;
 			}
 		}else{
@@ -36,6 +37,5 @@ public class ExactFilter extends TlmdFilter implements Filter  {
 		}
 		return true;
 	}
-
 
 }

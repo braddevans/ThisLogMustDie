@@ -1,0 +1,69 @@
+apply plugin: 'java'
+
+repositories {
+	jcenter()
+}
+
+configurations {
+	external
+}
+
+dependencies {
+	compile fileTree(dir: 'libs', include: '*.jar')
+	configurations.compile.extendsFrom(configurations.external)
+}
+
+
+group 'uk.co.piratescode'
+archivesBaseName = "ThisLogMistDie"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+def root = project.projectDir.parentFile
+sourceSets {
+	main {
+		java {
+			srcDir new File(root, "src")
+		}
+		resources {
+			srcDir new File(root, "resources")
+		}
+	}
+}
+
+processResources {
+	inputs.property "version", project.version
+	from(sourceSets.main.resources.srcDirs) {
+		include 'plugin.yml'
+		expand 'version': project.version
+	}
+	from(sourceSets.main.resources.srcDirs) {
+		exclude 'plugin.yml'
+	}
+}
+
+jar {
+	dependsOn 'patchVersion'
+	from sourceSets.main.output
+	from {
+		configurations.external.collect {
+			it.isDirectory() ? it : zipTree(it)
+		}
+	}
+}
+
+task patchVersion {
+	doLast {
+		Properties props = new Properties()
+		File propsFile = new File('gradle.properties')
+		props.load(propsFile.newDataInputStream())
+		def stable_project_version = props.getProperty('version') as String
+		def (major, minor, patch) = stable_project_version.tokenize('.')
+		patch = String.valueOf(patch.toInteger() + 1)
+		String snapshot_project_version = major + '.' + minor + '.' + patch
+		props.setProperty('version', snapshot_project_version)
+		props.store(propsFile.newWriter(), null)
+		println(snapshot_project_version)
+		}
+	}

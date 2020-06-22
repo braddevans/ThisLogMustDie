@@ -1,10 +1,10 @@
-package fr.areku.tlmd.filters;
+package uk.co.piratescode.tlmd.filters;
 
 import java.util.Map;
 import java.util.logging.Filter;
 import java.util.logging.LogRecord;
 
-import fr.areku.tlmd.TlmdFilter;
+import uk.co.piratescode.tlmd.TlmdFilter;
 
 
 public class PartialFilter extends TlmdFilter implements Filter  {

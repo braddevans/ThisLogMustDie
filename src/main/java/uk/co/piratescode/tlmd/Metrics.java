@@ -1,4 +1,4 @@
-package fr.areku.tlmd;
+package uk.co.piratescode.tlmd;
  /*
  * Copyright 2011 Tyler Blair. All rights reserved.
  *

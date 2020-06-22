@@ -1,4 +1,4 @@
-package fr.areku.tlmd;
+package uk.co.piratescode.tlmd;
 
 import java.io.File;
 import java.io.FileNotFoundException;
