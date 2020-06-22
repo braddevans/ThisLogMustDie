@@ -1,7 +1,9 @@
 apply plugin: 'java'
 
 repositories {
-	jcenter()
+	maven {
+		url = "https://nexus.piratescode.co.uk/repository/maven-public/"
+	}
 }
 
 configurations {
